@@ -5,7 +5,7 @@
 using namespace std;
 int swap(int *a, int *b);
 int c = 10, d= 20; //zmienne globalne do zad 2.3
-int srarytm(int* tab, int size); //zadanie 4
+float srarytm(float* tab, int* size); //zadanie 4
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
     int* p = tab; //przypisujemy adres pierwszego elementu tablicy do wskaünika
     for (int i = 0; i < size; i++)
     {
-        cout << "Wartosc wskaznika p dla indeksu " << i << " wynosi: " << *p++ << endl;
+        cout << "Wartosc wskaznika p dla indeksu " << i << " wynosi: " << *p++ << ". Adres to: "<< p <<endl;
 
     }
     */
@@ -59,12 +59,16 @@ int main()
     int x;
     int* ptr;
 
+    ptr = &x; //pobiera adres zmiennej
+
     cout << "Podaj wartosc x: ";
-    cin >> x;
-    ptr = &x;
+    cin >> *ptr;
+   
 
     cout << "Wartosc x: " << x << endl;
-    cout << "Adres x: " << *ptr << endl;
+    cout << "Wartosc pod wskaznikiem: " << *ptr << endl;
+    cout << "Adres zmiennej x (ptr): " << ptr << endl;
+    cout << "Adres zmiennej x (&x): " << &x << endl;
 
     */
 
@@ -145,8 +149,8 @@ int main()
     }
 
     float* wsk;
-    wsk = &tablica[n];
-    int i = n;
+    int i = n - 1;
+    wsk = &tablica[i];
 
     while (1) {
         
@@ -164,13 +168,25 @@ int main()
 
     }
     */
-
+    
+// /*
 //zadanie 4
+srand(time(NULL));
 int n;
 cout << "Podaj rozmiar tablicy: ";
 cin >> n;
 float* tablica = new float[n];
 
+cout << "Zawartosc tablicy: \n";
+for (int i = 0; i < n; i++) {
+    tablica[i] = rand()%1000;
+    cout << tablica[i] << " ";
+}
+cout << endl;
+
+srarytm(tablica,&n);
+delete []tablica;
+//*/
 }
 
 //zadanie 2.3
@@ -183,12 +199,18 @@ int swap(int* a, int* b)
     return 0;
 }
 
-int srarytm(int* tab, int size)
+ float srarytm(float tab[], int* size)
 {
-    int suma = 0;
-    for (int i = 0; i < size; i++)
+    float suma = 0;
+    int licznik = 0;
+    for (int i = 0; i < *size; i++)
     {
-        suma += *(tab + i);
+        suma += tab[i];
+        licznik++;
     }
-    return suma;
+    float srednia = 0;
+    srednia = suma / licznik;
+
+    cout << "Srednia arytmetyczna: " << srednia << endl;
+    return srednia;
 }
